@@ -46,15 +46,15 @@ Try {
     #Starts the backup job
     Start-WBBackup -Policy $Policy
 
-    if ([System.Diagnostics.EventLog]::SourceExists("C:\Users\Administrator\scriptprogramming\BackupEnvironment.ps1") -eq $False) {
-        New-EventLog -LogName "BackupStatus" -Source "C:\Users\Administrator\scriptprogramming\BackupEnvironment.ps1"
+    if ([System.Diagnostics.EventLog]::SourceExists("C:\Users\Administrator\scriptprogramming\Backup.ps1") -eq $False) {
+        New-EventLog -LogName "BackupStatus" -Source "C:\Users\Administrator\scriptprogramming\Backup.ps1"
     }
-    Write-EventLog -LogName "BackupStatus" -Source  "C:\Users\Administrator\scriptprogramming\BackupEnvironment.ps1" -EventID 3001 -EntryType SuccessAudit -Message "Backup($date) success"
+    Write-EventLog -LogName "BackupStatus" -Source  "C:\Users\Administrator\scriptprogramming\Backup.ps1" -EventID 3001 -EntryType SuccessAudit -Message "Backup($date) success"
 } Catch {
-   if ([System.Diagnostics.EventLog]::SourceExists("C:\Users\Administrator\scriptprogramming\BackupEnvironment.ps1") -eq $false) {
-        New-EventLog -LogName "BackupStatus" -Source "C:\Users\Administrator\scriptprogramming\BackupEnvironment.ps1";
+   if ([System.Diagnostics.EventLog]::SourceExists("C:\Users\Administrator\scriptprogramming\Backup.ps1") -eq $false) {
+        New-EventLog -LogName "BackupStatus" -Source "C:\Users\Administrator\scriptprogramming\Backup.ps1";
    }
-   Write-EventLog -LogName "BackupStatus" -Source  "C:\Users\Administrator\scriptprogramming\BackupEnvironment.ps1" -EventID 3001 -EntryType SuccessAudit -Message "Backup($date) ERROR"
+   Write-EventLog -LogName "BackupStatus" -Source  "C:\Users\Administrator\scriptprogramming\Backup.ps1" -EventID 3001 -EntryType ERROR -Message "Backup($date) ERROR"
 }
 
 # SIG # Begin signature block
