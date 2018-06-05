@@ -49,13 +49,13 @@ Foreach ($Computer in $Computers)
      $version = $ComputerObject.Version
 
      #Get Last Update DATE
-     $LastUpdateEntry = Get-WmiObject -ClassName win32_quickfixengineering | sort installedon -desc | select -First 1
+     $LastUpdateEntry = Get-WmiObject -Computer $ComputerName -ClassName win32_quickfixengineering | sort installedon -desc | select -First 1
      $lastUpdateDate = $LastUpdateEntry.InstalledOn
 
      #Get Space information
      $totalDiskSpace = 0
      $freeDiskSpace = 0
-     Get-WmiObject -ClassName Win32_LogicalDisk -ComputerName $ComputerName | Select-Object -Property Size,FreeSpace | %{
+     Get-WmiObject -ComputerName $ComputerName -ClassName Win32_LogicalDisk  | Select-Object -Property Size,FreeSpace | %{
        $totalDiskSpace += $_.Size
        $freeDiskSpace += $_.FreeSpace
      }
